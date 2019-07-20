@@ -56,7 +56,7 @@ public class StreamHW {
     public static Integer sum(List<Integer> integers){
         return integers
         		.stream()
-        		.reduce(0, (i1,i2) -> i1+i2);
+        		.reduce(0, (i1,i2) -> Integer.sum(i1, i2));
     }
 
     public static List<Integer> skip(List<Integer> integers, Integer toSkip){
@@ -95,14 +95,14 @@ public class StreamHW {
     public static Integer getMaxAge(List<User> users){
     	return users
     			.stream()
-    			.map(User::getAge)
-    			.reduce((a,b) -> a>b?a:b).get();
+    			.mapToInt(User::getAge)
+    			.reduce((a,b) -> a>b?a:b).getAsInt();
     }
     public static Integer getMinAge(List<User> users) {
     	return users
     			.stream()
-    			.map(User::getAge)
-    			.reduce((a,b) -> a<b?a:b).get();
+    			.mapToInt(User::getAge)
+    			.reduce((a,b) -> a<b?a:b).getAsInt();
     }
 
     public static Map<Boolean, List<User>> partionUsersByGender(List<User> users){
@@ -178,7 +178,7 @@ public class StreamHW {
     }
 
     public static int sumAge(List<User> users){
-    	return users.stream().map(User::getAge).reduce((a,b) -> a+b).get();
+    	return users.stream().map(User::getAge).reduce((a,b) -> Integer.sum(a, b)).get();
     }
 
     public static IntSummaryStatistics ageSummaryStatistics(List<User> users){
